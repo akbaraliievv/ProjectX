@@ -1,5 +1,6 @@
 package peaksoft.service.impl;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import peaksoft.entities.Hospital;
@@ -9,6 +10,7 @@ import peaksoft.service.HospitalService;
 import java.util.List;
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class HospitalServiceImpl implements HospitalService {
 
     private final HospitalRepository hospitalRepository;

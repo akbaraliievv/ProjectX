@@ -10,6 +10,7 @@ import peaksoft.repository.DepartmentRepository;
 
 import java.util.List;
 @RequiredArgsConstructor
+@Transactional
 @Repository
 public class DepartmentRepositoryImpl implements DepartmentRepository {
     @PersistenceContext

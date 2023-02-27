@@ -11,6 +11,7 @@ import peaksoft.service.AppointmentService;
 import java.util.List;
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentRepository appointmentRepository;
     private final DepartmentRepository departmentRepository;

@@ -12,6 +12,7 @@ import peaksoft.repository.AppointmentRepository;
 import java.util.List;
 
 @Repository
+@Transactional
 @RequiredArgsConstructor
 public class AppointmentRepositoryImpl implements AppointmentRepository {
     @PersistenceContext

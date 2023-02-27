@@ -12,6 +12,7 @@ import peaksoft.repository.DoctorRepository;
 
 import java.util.List;
 @Repository
+@Transactional
 @RequiredArgsConstructor
 public class DoctorRepositoryImpl implements DoctorRepository{
     @PersistenceContext

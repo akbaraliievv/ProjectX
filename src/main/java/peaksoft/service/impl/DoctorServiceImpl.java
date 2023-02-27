@@ -13,6 +13,7 @@ import peaksoft.service.DoctorService;
 import java.util.List;
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class DoctorServiceImpl implements DoctorService {
     private final DoctorRepository doctorRepository;
     private final HospitalRepository hospitalRepository;
