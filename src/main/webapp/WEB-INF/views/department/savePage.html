@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Departments</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="wrapper-btn">
+    <a th:href="@{/hospitals}">
+        <button class="btn btn-primary" type="button">Back</button>
+    </a>
+</div>
+<div class="wrapper-btn">
+    <a th:href="@{/hospitals/departments/{id}(id=${hospitalId})}">
+        <button class="btn btn-primary" type="button">Update</button>
+    </a>
+</div>
+<div class="container mt-3">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Name</th>
+            <th>Hospital</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="department : ${departments}">
+            <td th:text="${department.name}"></td>
+            <td th:text="${department.hospital.name}"></td>
+            <td>
+                <a th:href="@{/departments/edit/{id}(id=${department.id})}">
+                    <button class="btn btn-primary" type="submit">Edit</button>
+                </a>
+            </td>
+            <td>
+                <a th:href="@{/departments/{hospitalId}/{id}/delete(hospitalId=${hospitalId},id=${department.id})}">
+                    <button class="btn btn-primary" type="submit">Delete</button>
+                </a>
+            </td>
+            <td>
+                <form th:method="POST"
+                      th:action="@{/departments/{hospitalId}/{departmentId}/assignDoctor(hospitalId=${hospitalId},departmentId=${department.getId()})}">
+                    <select name="department" class="form-select form-select-sm" aria-label=".form-select-sm example"
+                            th:object="${doctor}" th:field="*{id}">
+                        <option th:each="doctor : ${doctors}"
+                                th:value="${doctor.id}"
+                                th:text="${doctor.firstName}"></option>
+                    </select>
+                    <input type="submit" value="submit"/>
+                </form>
+            </td>
+        </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+    <li class="nav-item">
+        <a class="nav-link" th:href="@{/departments/new/{id} (id=${hospitalId})}" href="#">New Department</a>
+    </li>
+    <br>
+
+</div>
+
+</body>
+</html>

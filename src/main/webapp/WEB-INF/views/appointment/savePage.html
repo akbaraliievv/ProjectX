@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctors</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="wrapper-btn">
+    <a th:href="@{/hospitals}">
+        <button class="btn btn-primary" type="button">back</button>
+    </a>
+    <li class="nav-item">
+        <a class="nav-link" th:href="@{/appointments/new/{id}(id=${hospitalId})}" href="#">New Appointment</a>
+    </li>
+</div>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Patient Name</th>
+            <th>Department Name</th>
+            <th>Doctor Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="appointment:${appointments}">
+            <td th:text="${appointment.getDate()}"></td>
+            <td th:text="${appointment.getPatient().lastName}"></td>
+            <td th:text="${appointment.getDepartment().name}"></td>
+            <td th:text="${appointment.getDoctor().lastName}"></td>
+
+            <td class="div">
+                <form th:method="GET"
+                      th:action="@{/appointments/edit/{appointmentId}(appointmentId=${appointment.getId()})}">
+                    <input type="submit" th:value="Update"/>
+                </form>
+            </td>
+
+            <td>
+                <form th:method="DELETE"
+                      th:action="@{/appointments/{hospitalId}/{appointmentId}/delete(hospitalId=${hospitalId},appointmentId=${appointment.getId()})}">
+                    <input type="submit" th:value="Delete"/>
+                </form>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
